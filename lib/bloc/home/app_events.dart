@@ -10,3 +10,14 @@ class LoadUserEvent extends UserEvent {
   @override
   List<Object?> get props => [];
 }
+
+/*
+class UpdateCurrentIndexEvent extends UserEvent {
+  final int newIndex;
+
+  const UpdateCurrentIndexEvent(this.newIndex);
+
+  @override
+  List<Object> get props => [newIndex];
+}
+*/
