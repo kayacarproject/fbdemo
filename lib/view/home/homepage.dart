@@ -6,13 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/home/app_blocs.dart';
 import '../../bloc/home/app_events.dart';
 import '../../bloc/home/app_states.dart';
-import '../../model/user_model.dart';
 import '../../repo/repositories.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
 
   // final String title;
 
@@ -24,7 +21,7 @@ class MyHomePageState1 extends State<HomePage> {
 // class HomePage extends StatelessWidget {
 //   const HomePage({super.key});
 
-int _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +71,7 @@ int _currentIndex = 0;
                     //scrollDirection: Axis.vertical,
                     onPageChanged: (index, reason) {
                       _currentIndex = index;
-                      setState(() {
-                      });
+                      setState(() {});
                       /*context.read<UserBloc>().add(
                             UpdateCurrentIndexEvent(index),
                           );*/
