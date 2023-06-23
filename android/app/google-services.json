@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "528705281580",
+    "firebase_url": "https://spyapp-7cca4.firebaseio.com",
+    "project_id": "spyapp-7cca4",
+    "storage_bucket": "spyapp-7cca4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528705281580:android:dba658b280dc18c0b9fb89",
+        "android_client_info": {
+          "package_name": "app.fb.fbdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528705281580-0kljd0dmj835mf8hh5ourflc921u3fh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9u_S9xbVYxQNBIlDaqczY9Z8ofIYbI9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528705281580-0kljd0dmj835mf8hh5ourflc921u3fh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528705281580:android:d1f1342a451589cfb9fb89",
+        "android_client_info": {
+          "package_name": "com.systemapp.spyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528705281580-ns50fqkqpaivg1f4ads62rfokhaidhiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.systemapp.spyapp",
+            "certificate_hash": "db9513eabcff29a6fb36314619f4c49b73293dd0"
+          }
+        },
+        {
+          "client_id": "528705281580-0kljd0dmj835mf8hh5ourflc921u3fh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9u_S9xbVYxQNBIlDaqczY9Z8ofIYbI9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528705281580-0kljd0dmj835mf8hh5ourflc921u3fh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
