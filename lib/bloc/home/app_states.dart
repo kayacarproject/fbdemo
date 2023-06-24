@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:fbdemo/model/banner_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/tbl_model.dart';
 import '../../model/user_model.dart';
 
 @immutable
@@ -23,6 +24,37 @@ class UserLoadedState extends UserState {
 class UserErrorState extends UserState {
   final String error;
   UserErrorState(this.error);
+
+  @override
+  List<Object?> get props => [error];
+}
+
+
+
+
+
+
+
+@immutable
+abstract class TblState extends Equatable {}
+
+
+//data loading state
+class TblLoadingState extends TblState {
+  @override
+  List<Object?> get props => [];
+}
+
+class TblLoadedState extends TblState {
+  final List<TblModel> tblData;
+  TblLoadedState(this.tblData);
+
+  @override
+  List<Object?> get props => [tblData];
+}
+class TblErrorState extends TblState {
+  final String error;
+  TblErrorState(this.error);
 
   @override
   List<Object?> get props => [error];

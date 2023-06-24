@@ -11,6 +11,23 @@ class LoadUserEvent extends UserEvent {
   List<Object?> get props => [];
 }
 
+
+
+
+@immutable
+abstract class TblEvent extends Equatable {
+  const TblEvent();
+}
+
+class LoadTblEvent extends TblEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+
+
+
+
 /*
 class UpdateCurrentIndexEvent extends UserEvent {
   final int newIndex;

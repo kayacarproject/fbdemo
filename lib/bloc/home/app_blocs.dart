@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repo/repositories.dart';
@@ -9,6 +11,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   UserBloc(this._userRepository) : super(UserLoadingState()) {
     on<LoadUserEvent>((event, emit) async {
+      // print("loading=-==--=--=1");
       emit(UserLoadingState());
       try {
         final users = await _userRepository.getUsers();
@@ -17,26 +20,31 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserErrorState(e.toString()));
       }
     });
+
+
   }
 }
 
 
 
-
-/*
-class UserBloc extends Bloc<UserEvent, UserState> {
+class TblBloc extends Bloc<TblEvent, TblState> {
   final UserRepository _userRepository;
 
-  UserBloc(this._userRepository) : super(UserLoadingState()) {
-    on<LoadUserEvent>((event, emit) async {
-      emit(UserLoadingState());
+  TblBloc(this._userRepository) : super(TblLoadingState()) {
+
+    on<LoadTblEvent>((event, emit) async {
+      // print("loading=-==--=--=1");
       try {
-        final users = await _userRepository.getUsers();
-        emit(UserLoadedState(users, 0));
+      emit(TblLoadingState());
+        final tblData = await _userRepository.getTableData();
+        emit(TblLoadedState(tblData));
       } catch (e) {
-        emit(UserErrorState(e.toString()));
+        emit(TblErrorState(e.toString()));
       }
     });
+
   }
 }
-*/
+
+
+
