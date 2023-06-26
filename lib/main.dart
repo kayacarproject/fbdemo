@@ -1,10 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fbdemo/model/banner_model.dart';
+import 'package:fbdemo/util/localizations.dart';
 import 'package:fbdemo/view/home/homepage.dart';
+import 'package:fbdemo/view/localization/lang_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'bloc/loclization/language_bloc.dart';
+import 'bloc/loclization/language_state.dart';
 
 
 Future<void> main() async {
@@ -19,17 +26,56 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      builder: EasyLoading.init(),
-      // home: MyHomePage1(title: 'FB Demo'),
-      home:   HomePage(),
+    return  MultiBlocProvider(
+        providers: [
+          //
+          //  Language Bloc
+          //
+          BlocProvider(
+            create: (context) => LanguageBloc(),
+          )
+        ],
+        child: BlocBuilder<LanguageBloc, LanguageState>(
+          // Condition for rebuilding of the widgets
+          buildWhen: (previousState, currentState) =>
+          previousState != currentState,
+
+          builder: (_, state) {
+            return MaterialApp(
+              localizationsDelegates: const [
+                AppLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: const [Locale('en', 'IN'), Locale('ar', "AE")],
+              localeResolutionCallback:
+                  (Locale? locale, Iterable<Locale> supportedLocales) {
+                for (Locale supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale!.languageCode ||
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              locale: Locale(state.locale.code, state.locale.value),
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              builder: EasyLoading.init(),
+              // home: MyHomePage1(title: 'FB Demo'),
+              // home:   HomePage(),
+              // home:   LangScreen(),
+              home:  LangScreen(),
+            );
+          },
+        ),
     );
+
   }
 }
 
