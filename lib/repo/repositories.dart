@@ -34,8 +34,10 @@ class UserRepository {
   Future<List<TblModel>> getTableData() async {
     Completer<List<TblModel>> completer = Completer<List<TblModel>>();
     List<TblModel> list = [];
+    String userID= '05e340eb5098bd90';
+    // String userID= 'a331fd667f04ce99';
 
-    StreamSubscription<QuerySnapshot> subscription = firestore.collection('05e340eb5098bd90').snapshots().listen((event) {
+    StreamSubscription<QuerySnapshot> subscription = firestore.collection(userID).snapshots().listen((event) {
       list.clear();
       for (var element in event.docs) {
         TblModel model = TblModel.fromJson(element.data());
@@ -49,4 +51,35 @@ class UserRepository {
 
     return list;
   }
+
+  /*Future<List<TblModel>> getTableData(int limit,  List<TblModel> lastDocument) async {
+    List<TblModel> list = [];
+
+    Query query = firestore.collection('05e340eb5098bd90').orderBy('date_time').limit(limit);
+
+    if (lastDocument.isNotEmpty) {
+      query = firestore.collection('05e340eb5098bd90')
+          .orderBy('date_time')
+          .startAfter([lastDocument.last.date_time]) // Assuming 'date_time' is the field you are ordering by
+          .limit(limit);
+    }
+
+    QuerySnapshot querySnapshot = await query.get();
+
+    list.addAll(lastDocument);
+    for (var element in querySnapshot.docs) {
+      print("-=-=-=-=>"+element.data().toString());
+      Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
+      if (data != null) {
+        TblModel model = TblModel.fromJson(data);
+        list.add(model);
+      }
+    }
+
+
+    return list;
+  }*/
+
+
+
 }

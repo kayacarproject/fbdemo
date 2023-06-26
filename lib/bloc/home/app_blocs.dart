@@ -15,7 +15,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoadingState());
       try {
         final users = await _userRepository.getUsers();
-        emit(UserLoadedState(users));
+        if(users.isEmpty) {
+          emit(UserErrorState("No Data Found"));
+        } else {
+          emit(UserLoadedState(users));
+        }
+
       } catch (e) {
         emit(UserErrorState(e.toString()));
       }
@@ -36,9 +41,15 @@ class TblBloc extends Bloc<TblEvent, TblState> {
       // print("loading=-==--=--=1");
       try {
       emit(TblLoadingState());
+        // final tblData = await _userRepository.getTableData(event.limit!,event.list!);
         final tblData = await _userRepository.getTableData();
-        emit(TblLoadedState(tblData));
+        if(tblData.isEmpty) {
+          emit(TblErrorState("No Data Found"));
+        }else {
+          emit(TblLoadedState(tblData));
+        }
       } catch (e) {
+        print("eeeeee>>>"+e.toString());
         emit(TblErrorState(e.toString()));
       }
     });
