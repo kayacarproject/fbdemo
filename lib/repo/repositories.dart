@@ -12,24 +12,27 @@ class UserRepository {
   // String userUrl = 'https://reqres.in/api/users?page=2';
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<List<BannerModel>> getUsers() async {
-    Completer<List<BannerModel>> completer = Completer<List<BannerModel>>();
-    List<BannerModel> bannerList = [];
+    Future<List<BannerModel>> getUsers() async {
+      Completer<List<BannerModel>> completer = Completer<List<BannerModel>>();
+      List<BannerModel> bannerList = [];
 
-    StreamSubscription<QuerySnapshot> subscription = firestore.collection('tblBanner').snapshots().listen((event) {
-      bannerList.clear();
-      for (var element in event.docs) {
-        BannerModel model = BannerModel.fromJson(element.data());
-        if (model.isDeleted == "false") bannerList.add(model);
-      }
-      completer.complete(bannerList);
-    });
+      StreamSubscription<QuerySnapshot> subscription = firestore.collection('tblBanner').snapshots().listen((event) {
+        bannerList.clear();
+        for (var element in event.docs) {
+          print("-=-=-=-=>"+element.data().toString());
+          BannerModel model = BannerModel.fromJson(element.data());
+          if (model.isDeleted == "false") bannerList.add(model);
+        }
+        if (!completer.isCompleted) {
+          completer.complete(bannerList);
+        }
+      });
 
-    await completer.future;
-    subscription.cancel();
+      await completer.future;
+      // subscription.cancel();
 
-    return bannerList;
-  }
+      return bannerList;
+    }
 
   Future<List<TblModel>> getTableData() async {
     Completer<List<TblModel>> completer = Completer<List<TblModel>>();
@@ -37,17 +40,19 @@ class UserRepository {
     String userID= '05e340eb5098bd90';
     // String userID= 'a331fd667f04ce99';
 
-    StreamSubscription<QuerySnapshot> subscription = firestore.collection(userID).snapshots().listen((event) {
+    StreamSubscription<QuerySnapshot> subscription = firestore.collection(userID).limit(10).snapshots().listen((event) {
       list.clear();
       for (var element in event.docs) {
         TblModel model = TblModel.fromJson(element.data());
         list.add(model);
       }
-      completer.complete(list);
+      if (!completer.isCompleted) {
+        completer.complete(list);
+      }
     });
 
     await completer.future;
-    subscription.cancel(); // Cancel the stream subscription
+    // subscription.cancel(); // Cancel the stream subscription
 
     return list;
   }

@@ -4,7 +4,10 @@ class Assets {
 
   static const String imagesEmptyimages = 'assets/images/Emptyimages.png';
   static const String imagesLeftBack = 'assets/images/left_back.png';
-  static const String localeLocalizationAr = 'assets/locale/ar.json';
-  static const String localeLocalizationEn = 'assets/locale/en.json';
+  static const String imagesSelectRightCircle = 'assets/images/select_right_circle.png';
+  static const String localeAr = 'assets/locale/ar.json';
+  static const String localeEn = 'assets/locale/en.json';
+  static const String localeGu = 'assets/locale/gu.json';
+  static const String localeHi = 'assets/locale/hi.json';
 
 }

@@ -13,7 +13,9 @@ class Languages {
 
   // Languages supported
   static const languages = [
-    LanguageEntity(code: 'en', value: 'IN'),
-    LanguageEntity(code: 'ar', value: 'AE'),
+    LanguageEntity(code: 'en', value: 'ENGLISH'),
+    LanguageEntity(code: 'gu', value: 'ગુજરાતી'),
+    LanguageEntity(code: 'hi', value: 'हिन्दी'),
+    // LanguageEntity(code: 'ar', value: 'AE'),
   ];
 }

@@ -1,3 +1,7 @@
+// import 'dart:io';
+
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fbdemo/model/banner_model.dart';
@@ -6,6 +10,7 @@ import 'package:fbdemo/view/home/homepage.dart';
 import 'package:fbdemo/view/localization/lang_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,10 +18,24 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'bloc/loclization/language_bloc.dart';
 import 'bloc/loclization/language_state.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // if(Platform.isMacOS || Platform.isWindows) {
+
+  // }else{
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyCO-84-cwOVVm5CSw7DB3mfQImJyfMN_4k",
+        appId: "1:528705281580:web:4d869ac2cacf02b7b9fb89",
+        messagingSenderId: "528705281580",
+        projectId: "spyapp-7cca4",
+      ),
+    );
+  } catch (e) {
+    await Firebase.initializeApp();
+  }
+  // }
   runApp(const MyApp());
 }
 
@@ -26,56 +45,70 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
-        providers: [
-          //
-          //  Language Bloc
-          //
-          BlocProvider(
-            create: (context) => LanguageBloc(),
-          )
-        ],
-        child: BlocBuilder<LanguageBloc, LanguageState>(
-          // Condition for rebuilding of the widgets
-          buildWhen: (previousState, currentState) =>
-          previousState != currentState,
-
-          builder: (_, state) {
-            return MaterialApp(
-              localizationsDelegates: const [
-                AppLocalizationsDelegate(),
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              supportedLocales: const [Locale('en', 'IN'), Locale('ar', "AE")],
-              localeResolutionCallback:
-                  (Locale? locale, Iterable<Locale> supportedLocales) {
-                for (Locale supportedLocale in supportedLocales) {
-                  if (supportedLocale.languageCode == locale!.languageCode ||
-                      supportedLocale.countryCode == locale.countryCode) {
-                    return supportedLocale;
-                  }
-                }
-                return supportedLocales.first;
-              },
-              locale: Locale(state.locale.code, state.locale.value),
-              title: 'Flutter Demo',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-              builder: EasyLoading.init(),
-              // home: MyHomePage1(title: 'FB Demo'),
-              // home:   HomePage(),
-              // home:   LangScreen(),
-              home:  LangScreen(),
-            );
-          },
-        ),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.deepPurple,
+      ),
     );
 
+    return MultiBlocProvider(
+      providers: [
+        //
+        //  Language Bloc
+        //
+        BlocProvider(
+          create: (context) => LanguageBloc(),
+        )
+      ],
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        // Condition for rebuilding of the widgets
+        buildWhen: (previousState, currentState) =>
+            previousState != currentState,
+
+        builder: (_, state) {
+          return MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', 'IN'),
+              Locale('gu', "IN"),
+              Locale('hi', "IN"),
+              // Locale('ar', "AE"),
+            ],
+            localeResolutionCallback:
+                (Locale? locale, Iterable<Locale> supportedLocales) {
+              for (Locale supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale!.languageCode ||
+                    supportedLocale.countryCode == locale.countryCode) {
+                  return supportedLocale;
+                }
+              }
+              return supportedLocales.first;
+            },
+            locale: Locale(state.locale.code, state.locale.value),
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            builder: EasyLoading.init(),
+            // home: MyHomePage1(title: 'FB Demo'),
+            // home:   HomePage(),
+            // home:   LangScreen(),
+            home: const LangScreen(),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -207,5 +240,3 @@ class _MyHomePageState1 extends State<MyHomePage1> {
     );
   }
 }*/
-
-
