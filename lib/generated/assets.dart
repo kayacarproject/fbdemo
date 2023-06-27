@@ -2,7 +2,7 @@
 class Assets {
   Assets._();
 
-  static const String imagesEmptyimages = 'assets/images/Emptyimages.png';
+  static const String imagesEmptyimages = 'assets/images/empty_images.png';
   static const String imagesLeftBack = 'assets/images/left_back.png';
   static const String imagesSelectRightCircle = 'assets/images/select_right_circle.png';
   static const String localeAr = 'assets/locale/ar.json';

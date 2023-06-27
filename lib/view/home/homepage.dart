@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../bloc/home/app_blocs.dart';
 import '../../bloc/home/app_events.dart';
@@ -64,6 +65,16 @@ class MyHomePageState1 extends State<HomePage> {
     tblBloc.add(LoadTblEvent(limit: LIMIT_PER_PAGE, list: userList));
     print("next page call......DONE");
   }*/
+
+
+  Future<void> _openURL(String url) async {
+    try {
+      print("url=--=--==->" + url);
+        await launch(url);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -475,6 +486,139 @@ class MyHomePageState1 extends State<HomePage> {
                     ),
                   ),
                 ),
+                Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      left: 20,
+                      right: 20,
+                      bottom: 30,
+                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          _openURL("https://www.baps.org/");
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/empty_images.png',),
+                            radius: 20, // half of the width and height to keep it circular
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _openURL("https://pramukhswami.org/");
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/empty_images.png',),
+                            radius: 20, // half of the width and height to keep it circular
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _openURL("https://akshardham.com/");
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/empty_images.png',),
+                            radius: 20, // half of the width and height to keep it circular
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _openURL("https://baps.store/");
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/empty_images.png',),
+                            radius: 20, // half of the width and height to keep it circular
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _openURL("https://www.baps.org/Global-Network");
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(
+                            left: 5,
+                            right: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/empty_images.png',),
+                            radius: 20, // half of the width and height to keep it circular
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           );
@@ -485,7 +629,7 @@ class MyHomePageState1 extends State<HomePage> {
       child: Padding(
         padding: const EdgeInsets.only(top: 0),
         child: Image.asset(
-          "assets/images/Emptyimages.png",
+          "assets/images/empty_images.png",
         ),
       ),
     );
