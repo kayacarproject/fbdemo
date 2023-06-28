@@ -244,6 +244,8 @@ class _MyHomePageState extends State<VideoPage> {
     //     statusBarColor: Colors.deepPurple,
     //   ),
     // );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 
