@@ -37,10 +37,11 @@ class UserRepository {
   Future<List<TblModel>> getTableData() async {
     Completer<List<TblModel>> completer = Completer<List<TblModel>>();
     List<TblModel> list = [];
-    String userID= '05e340eb5098bd90';
+    // String userID= '05e340eb5098bd90';
+    String userID= 'category1';
     // String userID= 'a331fd667f04ce99';
 
-    StreamSubscription<QuerySnapshot> subscription = firestore.collection(userID).limit(10).snapshots().listen((event) {
+    StreamSubscription<QuerySnapshot> subscription = firestore.collection(userID).snapshots().listen((event) {
       list.clear();
       for (var element in event.docs) {
         TblModel model = TblModel.fromJson(element.data());

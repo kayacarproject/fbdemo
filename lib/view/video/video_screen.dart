@@ -178,6 +178,7 @@ class _MyHomePageState extends State<VideoPage> {
   double _volume = 100;
   bool _muted = false;
   bool _isPlayerReady = false;
+  bool _isLandScape = false;
 
   //
   // final List<String> _ids = [
@@ -260,17 +261,37 @@ class _MyHomePageState extends State<VideoPage> {
     //   ),
     // );
     return YoutubePlayerBuilder(
-      onExitFullScreen: () {
-        print("onExitFullScreen=-=-=->");
-        SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            statusBarColor: Colors.deepPurple,
-          ),
-        );
-        SystemChrome.setEnabledSystemUIMode(
-            SystemUiMode.edgeToEdge);
+      onEnterFullScreen: () {
+        print("Enter Full Screen=-=-=->");
+        _isLandScape = true;
       },
+      onExitFullScreen: () {
+        if (_isLandScape) {
+          _isLandScape = false;
+          print("onExitFullScreen=-=-=->");
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: Colors.deepPurple,
+            ),
+          );
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+        }
+      },
+      /*onEnterFullScreen: () {
+        print('YOUTUBE_PLAYER: ON_ENTER_CALLED');
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+      },
+      onExitFullScreen: () {
+        print('YOUTUBE_PLAYER: ON_EXIT_CALLED');
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+      },*/
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
@@ -298,6 +319,7 @@ class _MyHomePageState extends State<VideoPage> {
         },
       ),
       builder: (context, player) => Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
           leading: InkWell(
@@ -315,8 +337,8 @@ class _MyHomePageState extends State<VideoPage> {
               Navigator.pop(context);
             },
           ),
-          title:  Text(
-              _controller.metadata.title ?? "",
+          title: Text(
+            _controller.metadata.title ?? "",
             style: TextStyle(
               color: Colors.white,
             ),

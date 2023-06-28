@@ -1,26 +1,43 @@
 // ignore: file_names
 
 class TblModel {
-  String? big_text;
-  String? date_time;
-  String? sub_text;
-  String? title;
+  String? catAuth;
+  String? catDesc;
+  String? catId;
+  String? catImgURL;
+  String? catTitle;
+  String? isDeleted;
+  String? timestamp;
 
-  TblModel({this.big_text, this.date_time, this.sub_text, this.title});
+  TblModel({this.catAuth, this.catDesc, this.catId, this.catImgURL, this.catTitle, this.isDeleted, this.timestamp});
 
   TblModel.fromJson(Map<String, dynamic> json) {
-    big_text = json['big_text'].toString();
-    date_time = json['date_time'].toString();
-    sub_text = json['sub_text'].toString();
-    title = json['title'].toString();
+    catAuth = json['catAuth'].toString();
+    catDesc = json['catDesc'].toString();
+    catId = json['catId'].toString();
+    catImgURL = json['catImgURL'].toString();
+    catTitle = json['catTitle'].toString();
+    isDeleted = json['isDeleted'].toString();
+    timestamp = json['timestamp'].toString();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['big_text'] = big_text;
-    data['date_time'] = date_time;
-    data['sub_text'] = sub_text;
-    data['title'] = title;
+    data['catAuth'] = catAuth;
+    data['catDesc'] = catDesc;
+    data['catId'] = catId;
+    data['catImgURL'] = catImgURL;
+    data['catTitle'] = catTitle;
+    data['isDeleted'] = isDeleted;
+    data['timestamp'] = timestamp;
     return data;
   }
 }
+
+// catAuth
+// catDesc
+// catId
+// catImgURL
+// catTitle
+// isDeleted
+// timestamp
